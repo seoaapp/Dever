@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Simple, but Powerful for Developers.",
   "main": "index.js",
-  "repository": "https://github.com/Helloyunho/Dever.git",
-  "author": "Helloyunho <yunho050840@gmail.com>",
+  "repository": "https://github.com/seoaaapp/Dever.git",
+  "author": "Seoa Development Team",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^6.5.1",
