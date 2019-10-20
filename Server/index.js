@@ -70,6 +70,9 @@ ws.on('connection', (client) => {
 })
 
 // 임시적으로 여기에 둠
+/**
+ * Class for **Seoaflake**
+ */
 class Seoaflake {
   constructor () {
     this.createData = new Date().getTime()
@@ -80,7 +83,15 @@ class Seoaflake {
   }
 }
 
+/**
+ * Represents a User.
+ */
 class User {
+  /**
+   * creates User class.
+   * @param {Seoaflake} id id of the user
+   * @param {string} nick username of the user
+   */
   constructor (id, nick) {
     this.id = id || new Seoaflake()
     this.username = nick || `guest_${this.id.rand}`
