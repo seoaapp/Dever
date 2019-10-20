@@ -19,8 +19,8 @@ const checkObjKeys = (obj, keys) => {
 }
 
 ws.on('connection', (client) => {
+  client.user = new User()
   client.on('message', (res) => {
-    client.user = new User()
     try {
       const data = JSON.parse(res)
       if (!checkObjKeys(data, ['type', 'data'])) {
