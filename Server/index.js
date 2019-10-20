@@ -5,7 +5,7 @@ const requestTypes = types.request
 const errorTypes = types.error
 const events = require('./events')
 const settings = require('./settings.js')
-
+const Seoa = require('./events/index')
 const ws = new WS.Server(settings.ws)
 
 const User = require('./classes/User')
