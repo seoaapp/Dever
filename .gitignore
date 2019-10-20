@@ -7,6 +7,10 @@
 package-lock.json
 yarn.lock
 
+#settings
+/Server/settings.js
+/Client/src/setting.js
+
 # testing
 /coverage
 
