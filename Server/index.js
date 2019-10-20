@@ -5,7 +5,7 @@ const requestTypes = types.request
 const errorTypes = types.error
 const events = require('./events')
 const settings = require('./settings.js')
-
+const Seoa = require('./events/index')
 const ws = new WS.Server(settings.ws)
 
 const checkObjKeys = (obj, keys) => {
@@ -69,19 +69,7 @@ ws.on('connection', (client) => {
   })
 })
 
-// 임시적으로 여기에 둠
-/**
- * Class for **Seoaflake**
- */
-class Seoaflake {
-  constructor () {
-    this.createData = new Date().getTime()
-    let temp = `${Math.floor(Math.random() * 89999 + 10000).toString(2)}`
-    for (let i = 0; i < 17 - temp.toString(2).length; i++) temp = `0${temp}`
-    this.id = parseInt(this.createData.toString(2) + temp, 2)
-    this.rand = parseInt(temp, 2)
-  }
-}
+
 
 /**
  * Represents a User.
@@ -93,7 +81,7 @@ class User {
    * @param {string} nick username of the user
    */
   constructor (id, nick) {
-    this.id = id || new Seoaflake()
+    this.id = id || new Seoa.Seoaflake()
     this.username = nick || `guest_${this.id.rand}`
   }
 }
