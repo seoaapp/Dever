@@ -81,7 +81,8 @@ class Seoaflake {
 }
 
 class User {
-  constructor (id) {
+  constructor (id, nick) {
     this.id = id || new Seoaflake()
+    this.username = nick || `guest_${this.id.rand}`
   }
 }
