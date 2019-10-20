@@ -1,4 +1,4 @@
-const Seoa = require('../events/index')
+const Seoaflake = require('./Seoaflake')
 
 /**
  * Represents a User.
@@ -9,7 +9,7 @@ class User {
    * @param {string} nick username of the user
    */
   constructor (id, nick) {
-    this.id = id || new Seoa.Seoaflake()
+    this.id = id || new Seoaflake()
     this.username = nick || `guest_${this.id.rand}`
   }
 }

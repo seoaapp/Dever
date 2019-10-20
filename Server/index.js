@@ -3,13 +3,13 @@ const types = require('./types')
 const responseTypes = types.response
 const requestTypes = types.request
 const errorTypes = types.error
+
 const events = require('./events')
-const settings = require('./settings.js')
-const Seoa = require('./events/index')
+const settings = require('./settings')
 const ws = new WS.Server(settings.ws)
 
-const User = require('./classes/User')
-const Seoaflake = require('./classes/Seoaflake')
+const classes = require('./classes')
+const User = classes.user
 
 const checkObjKeys = (obj, keys) => {
   const objKeys = Object.keys(obj)
@@ -71,4 +71,3 @@ ws.on('connection', (client) => {
     // Something'
   })
 })
-
