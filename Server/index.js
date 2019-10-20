@@ -9,7 +9,6 @@ const Seoa = require('./events/index')
 const ws = new WS.Server(settings.ws)
 
 const User = require('./classes/User')
-const Seoaflake = require('./classes/Seoaflake')
 
 const checkObjKeys = (obj, keys) => {
   const objKeys = Object.keys(obj)
