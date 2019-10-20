@@ -6,9 +6,9 @@ module.exports = (ws, data, client) => {
       JSON.stringify({
         type: responseTypes.CHANGE_STATUS,
         data: {
-          status: data.status,
-          target: client.id // nothing assignmented
-        }
+          status: data.status
+        },
+        user: client.user
       })
     )
   })

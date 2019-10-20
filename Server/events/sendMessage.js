@@ -9,9 +9,7 @@ module.exports = (ws, data, client) => {
           message: {
             message: data.message
           },
-          user: {
-            username: 'Test'
-          }
+          user: client.user
         }
       })
     )
