@@ -1,6 +1,25 @@
 const responseTypes = require('../types/responseTypes')
+const errorTypes = require('../types/errorTypes')
+const db = require('../test_db.json')
 
 module.exports = (ws, data, client) => {
+  if (
+    typeof client.id === 'undefined' ||
+    typeof db.users[client.id.toString()] === 'undefined'
+  ) {
+    client.send(
+      JSON.stringify({
+        type: responseTypes.ERROR,
+        data: {
+          error: errorTypes.JSON,
+          message: "There's no any needed args."
+        }
+      })
+    )
+    client.close()
+    return
+  }
+
   ws.clients.forEach((otherClient) => {
     otherClient.send(
       JSON.stringify({
