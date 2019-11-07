@@ -2,12 +2,25 @@
  * Class for **Seoaflake**
  */
 class Seoaflake {
-  constructor () {
-    this.createData = new Date().getTime()
-    let temp = `${Math.floor(Math.random() * 89999 + 10000).toString(2)}`
-    for (let i = 0; i < 17 - temp.toString(2).length; i++) temp = `0${temp}`
-    this.id = parseInt(this.createData.toString(2) + temp, 2)
-    this.rand = parseInt(temp, 2)
+  /**
+   * @param {number} id The number of id.
+   */
+  constructor (id) {
+    if (id) {
+      this.id = id
+      this.createdDate = parseInt(id.toString(2).slice(0, -17), 2)
+      this.rand = parseInt(id.toString(2).slice(-17), 2)
+    } else {
+      this.createdDate = new Date().getTime()
+      let temp = ''
+      for (let i = 0; i < 17; i++) temp += `${Math.round(Math.random())}`
+      this.id = parseInt(this.createdDate.toString(2) + temp, 2)
+      this.rand = parseInt(temp, 2)
+    }
+  }
+
+  toString () {
+    return this.id
   }
 }
 

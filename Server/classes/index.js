@@ -1,2 +1,2 @@
-module.exports.seoaflake = require('./Seoaflake')
-module.exports.user = require('./User')
+module.exports.Seoaflake = require('./Seoaflake')
+module.exports.User = require('./User')

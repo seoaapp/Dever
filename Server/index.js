@@ -8,9 +8,6 @@ const events = require('./events')
 const settings = require('./settings')
 const ws = new WS.Server(settings.ws)
 
-const classes = require('./classes')
-const User = classes.user
-
 const checkObjKeys = (obj, keys) => {
   const objKeys = Object.keys(obj)
   for (const key of keys) {
@@ -22,7 +19,6 @@ const checkObjKeys = (obj, keys) => {
 }
 
 ws.on('connection', (client) => {
-  client.user = new User()
   client.on('message', (res) => {
     try {
       const data = JSON.parse(res)
@@ -36,14 +32,11 @@ ws.on('connection', (client) => {
             }
           })
         )
+        client.close()
         return
       }
 
-      if (data.type === requestTypes.SEND_MESSAGE) {
-        events.sendMessage(ws, data.data, client)
-      } else if (data.type === requestTypes.CHANGE_STATUS) {
-        events.setStatus(ws, data.data, client)
-      } else {
+      if (!Object.values(requestTypes).includes(data.type)) {
         JSON.stringify({
           type: responseTypes.ERROR,
           data: {
@@ -51,6 +44,20 @@ ws.on('connection', (client) => {
             message: 'You called undefined requestType Code.'
           }
         })
+        client.close()
+        return
+      }
+
+      if (data.type === requestTypes.CONNECT) {
+        events.connect(
+          ws,
+          data.data,
+          client
+        )
+      } else if (data.type === requestTypes.SEND_MESSAGE) {
+        events.sendMessage(ws, data.data, client)
+      } else if (data.type === requestTypes.CHANGE_STATUS) {
+        events.setStatus(ws, data.data, client)
       }
     } catch (err) {
       if (err) {
