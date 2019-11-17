@@ -16,6 +16,7 @@ module.exports = (ws, data, client) => {
         }
       })
     )
+    console.log('[Client] Error: There\'s no any needed args.\n\tat [sendMessage]')
     client.close()
     return
   }

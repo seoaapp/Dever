@@ -14,7 +14,7 @@ const checkObjKeys = (obj, keys) => {
 }
 
 module.exports = (ws, data, client) => {
-  if (!checkObjKeys(data, ['id', 'username', 'password'])) {
+  if (!checkObjKeys(data, ['username', 'password'])) {
     client.send(
       JSON.stringify({
         type: responseTypes.ERROR,
@@ -27,8 +27,10 @@ module.exports = (ws, data, client) => {
     client.close()
     return
   }
-
-  const user = db.users[data.id.toString()]
+  
+  //check if login is vaild
+  const user = db.users[Object.values(db.users).find((element) => element.username === data.username).id]
+  //console.log(`${data.username}\n${data.password}\n${user.username}\n${user.password}`)
   if (data.username !== user.username || data.password !== user.password) {
     client.send(
       JSON.stringify({
@@ -39,11 +41,13 @@ module.exports = (ws, data, client) => {
         }
       })
     )
-    client.close()
+    console.log('[Client] Error: Username or password doesn\'t match.')
+    //client.close()
     return
   }
 
-  delete user.password
+  // logged in
+  console.log(`[Client] Logged in! as ${user.username} (${user.id})`)
   client.send(
     JSON.stringify({
       type: responseTypes.LOGINED,
