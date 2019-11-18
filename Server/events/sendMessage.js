@@ -4,8 +4,8 @@ const db = require('../test_db.json')
 
 module.exports = (ws, data, client) => {
   if (
-    typeof client.id === 'undefined' ||
-    typeof db.users[client.id.toString()] === 'undefined'
+    typeof client.user.id === 'undefined' ||
+    typeof db.users[client.user.id.toString()] === 'undefined'
   ) {
     client.send(
       JSON.stringify({
