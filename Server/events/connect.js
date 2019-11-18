@@ -27,10 +27,10 @@ module.exports = (ws, data, client) => {
     client.close()
     return
   }
-  
-  //check if login is vaild
+
+  // check if login is vaild
   const user = db.users[Object.values(db.users).find((element) => element.username === data.username).id]
-  //console.log(`${data.username}\n${data.password}\n${user.username}\n${user.password}`)
+  // console.log(`${data.username}\n${data.password}\n${user.username}\n${user.password}`)
   if (data.username !== user.username || data.password !== user.password) {
     client.send(
       JSON.stringify({
@@ -42,7 +42,7 @@ module.exports = (ws, data, client) => {
       })
     )
     console.log('[Client] Error: Username or password doesn\'t match.')
-    //client.close()
+    // client.close()
     return
   }
 
