@@ -3,6 +3,7 @@ const types = require('./types')
 const responseTypes = types.response
 const requestTypes = types.request
 const errorTypes = types.error
+const statusTypes = types.status
 
 const events = require('./events')
 const settings = require('./settings')
@@ -90,5 +91,6 @@ ws.on('connection', (client) => {
   client.on('disconnection', () => {
     // Something'
     console.log('client disconnected')
+    events.setStatus(ws, { status: statusTypes.OFFLINE }, client)
   })
 })
